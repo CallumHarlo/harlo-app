@@ -1,0 +1,42 @@
+grep -r "PRIVATE" ~/Downloads/betteryou 2>/dev/null
+grep -r "PRIVATE" ~/Downloads/betteryou 2>/dev/null
+
+
+
+
+grep -r "PRIVATE" ~/Downloads/betteryou 2>/dev/null
+python3 ~/Downloads/betteryou/patch3.py
+
+
+
+
+python3 ~/Downloads/betteryou/patch3.py
+
+
+
+cd ~/Downloads/betteryou
+
+
+
+
+
+
+
+
+grep -r "PRIVATE" ~/Downloads/betteryou 2>/dev/null
+
+
+cd ~/Downloads/betteryou && node -e "
+const crypto = require('crypto');
+async function gen() {
+  const keys = await crypto.webcrypto.subtle.generateKey(
+    { name: 'ECDH', namedCurve: 'P-256' }, true, ['deriveKey']
+  );
+  const pub = Buffer.from(await crypto.webcrypto.subtle.exportKey('raw', keys.publicKey)).toString('base64url');
+  const priv = Buffer.from(await crypto.webcrypto.subtle.exportKey('pkcs8', keys.privateKey)).toString('base64url');
+  console.log('PUBLIC=' + pub);
+  console.log('PRIVATE=' + priv);
+}
+gen();
+"
+\

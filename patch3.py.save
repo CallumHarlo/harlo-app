@@ -1,0 +1,90 @@
+cd ~/Downloads/betteryou && python3 - << 'EOF'
+import re
+
+path = '/Users/callumbenson/Downloads/betteryou/src/App.js'
+
+with open(path, 'r') as f:
+    content = f.read()
+
+# Replace with your actual public key between the quotes below
+PUBLIC_KEY = "BJ4X-sLy6D7_iSYQgzPR4ux0lH5_Y2akFky0bkXExCHt0o3IiIbOBwLXBpLyD5_hpMTdlTUJkTOHgZpY4i5n7jU"
+
+old_vapid = 'const VAPID_PUBLIC = "VAPID_PUBLIC_KEY_PLACEHOLDER";'
+new_vapid = f'const VAPID_PUBLIC = "{PUBLIC_KEY}";'
+
+if old_vapid in content:
+    content = content.replace(old_vapid, new_vapid)
+    print("✓ VAPID public key updated")
+else:
+    print("✗ VAPID placeholder not found")
+
+old_log = '''  const logMood = async (mood) => {
+    if (savingMood) return;
+    setSavingMood(true);'''
+
+new_log = '''  const logMood = async (mood) => {
+    if (savingMood) return;
+    if (navigator.vibrate) navigator.vibrate(10);
+    setSavingMood(true);'''
+
+if old_log in content:
+    content = content.replace(old_log, new_log)
+    print("✓ Haptic feedback added")
+else:
+    print("✗ Could not find logMood")
+
+with open(path, 'w') as f:
+    f.write(content)
+
+print("Done!")
+EOF
+npm run build && npx vercel --prod
+cd ~/Downloads/betteryou && node -e "
+const crypto = require('crypto');
+async function gen() {
+  const keys = await crypto.webcrypto.subtle.generateKey(
+    { name: 'ECDH', namedCurve: 'P-256' }, true, ['deriveKey']
+  );
+  const pub = Buffer.from(await crypto.webcrypto.subtle.exportKey('raw', keys.publicKey)).toString('base64url');
+  const priv = Buffer.from(await crypto.webcrypto.subtle.exportKey('pkcs8', keys.privateKey)).toString('base64url');
+  console.log('PUBLIC=' + pub);
+  console.log('PRIVATE=' + priv);
+}
+gen();
+"import re
+
+path = '/Users/callumbenson/Downloads/betteryou/src/App.js'
+
+with open(path, 'r') as f:
+    content = f.read()
+
+# ── 1. REPLACE VAPID PLACEHOLDER ──────────────────────────────────────────
+old_vapid = 'const VAPID_PUBLIC = "VAPID_PUBLIC_KEY_PLACEHOLDER";'
+new_vapid = 'const VAPID_PUBLIC = "BLx4pccvNcrp9Pn1JtLXMXt0amqE4CqRJeVX1blVzi9HYeG-oFW_qUNotXN-kdfXnZ-TBRxOc7sAqVrwBM0hWl4";'
+
+if old_vapid in content:
+    content = content.replace(old_vapid, new_vapid)
+    print("✓ VAPID public key updated")
+else:
+    print("✗ VAPID placeholder not found")
+
+# ── 2. ADD HAPTIC FEEDBACK TO MOOD LOGGER ─────────────────────────────────
+old_log = '''  const logMood = async (mood) => {
+    if (savingMood) return;
+    setSavingMood(true);'''
+
+new_log = '''  const logMood = async (mood) => {
+    if (savingMood) return;
+    if (navigator.vibrate) navigator.vibrate(10);
+    setSavingMood(true);'''
+
+if old_log in content:
+    content = content.replace(old_log, new_log)
+    print("✓ Haptic feedback added to mood tap")
+else:
+    print("✗ Could not find logMood function")
+
+with open(path, 'w') as f:
+    f.write(content)
+
+print("\nDone!")

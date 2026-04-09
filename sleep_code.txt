@@ -1,0 +1,80 @@
+function SleepScreen({ go }) {
+  const [activeId, setActiveId] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const audioCtxRef = useRef(null);
+  const nodesRef = useRef([]);
+  const stopAudio = () => {
+    nodesRef.current.forEach(n => { try { n.stop(); } catch(e) {} });
+    nodesRef.current = [];
+    if (audioCtxRef.current) { audioCtxRef.current.close(); audioCtxRef.current = null; }
+    setIsPlaying(false);
+  };
+  const playAudio = (id) => {
+    stopAudio();
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    audioCtxRef.current = ctx;
+    const master = ctx.createGain();
+    master.gain.value = 0.12;
+    master.connect(ctx.destination);
+    const add = (freq, gain, type) => {
+      const o = ctx.createOscillator();
+      const g = ctx.createGain();
+      o.type = type || 'sine'; o.frequency.value = freq; g.gain.value = gain;
+      o.connect(g); g.connect(master); o.start(); nodesRef.current.push(o);
+    };
+    const wave = (f, lf, d) => {
+      const o = ctx.createOscillator(); const l = ctx.createOscillator();
+      const lg = ctx.createGain(); const g = ctx.createGain();
+      o.frequency.value = f; l.frequency.value = lf; lg.gain.value = d; g.gain.value = 0.07;
+      l.connect(lg); lg.connect(o.frequency); o.connect(g); g.connect(master);
+      o.start(); l.start(); nodesRef.current.push(o, l);
+    };
+    if (id===1) { [80,160,240].forEach((f,i)=>add(f,0.3/(i+1))); wave(200,0.1,6); }
+    else if (id===2) { wave(100,0.07,25); wave(70,0.04,18); }
+    else if (id===3) { [40,80,120].forEach((f,i)=>add(f,0.35/(i+1),'sawtooth')); }
+    else if (id===4) { [180,360,540].forEach((f,i)=>add(f,0.15/(i+1))); wave(280,0.25,12); }
+    else if (id===5) { [600,900,1200].forEach((f,i)=>add(f,0.1/(i+1))); wave(800,1.5,180); }
+    else if (id===6) { [50,100,150].forEach((f,i)=>add(f,0.3/(i+1))); wave(180,0.08,18); }
+    setIsPlaying(true);
+  };
+  const toggle = (id) => {
+    if (activeId===id && isPlaying) { stopAudio(); setActiveId(null); }
+    else { setActiveId(id); playAudio(id); }
+  };
+  const stories = [
+    { id:1, title:'The Quiet Forest', desc:'A peaceful forest as the stars come out', emoji:'🌲', color:'#1a3a2a' },
+    { id:2, title:'Ocean Waves', desc:'Let the tide carry you to sleep', emoji:'🌊', color:'#1a2a3a' },
+    { id:3, title:'Mountain Cabin', desc:'Crackling fire, falling snow, stillness', emoji:'🏔', color:'#2a1a3a' },
+    { id:4, title:'Moonlit Meadow', desc:'Soft grass, warm breeze, sky full of stars', emoji:'🌕', color:'#1a2a1a' },
+    { id:5, title:'Rainy Afternoon', desc:'Cosy inside while rain taps on the window', emoji:'🌧', color:'#2a2a3a' },
+    { id:6, title:'Desert Sunset', desc:'The day melts away in gold and rose', emoji:'🌅', color:'#3a2a1a' },
+  ];
+  return (
+    <div className="screen" style={{ background:'#0d1117' }}>
+      <div style={{ padding:'52px 20px 20px', background:'#0d1117' }}>
+        <div style={{ fontSize:11, color:'rgba(255,255,255,.4)', marginBottom:6, cursor:'pointer' }} onClick={() => { stopAudio(); go('home'); }}>back</div>
+        <div style={{ fontFamily:"'Playfair Display',serif", fontSize:26, color:'white', fontWeight:600 }}>Sleep Stories</div>
+        <div style={{ fontSize:12, color:'rgba(255,255,255,.45)', marginTop:4 }}>Tap a story to play ambient sound</div>
+      </div>
+      <div style={{ padding:'0 16px 100px', flex:1, overflowY:'auto' }}>
+        {stories.map(s => (
+          <div key={s.id} onClick={() => toggle(s.id)} style={{ background:activeId===s.id?s.color:'#1a1f2e', borderRadius:16, padding:'18px 16px', marginBottom:12, cursor:'pointer', border:activeId===s.id?'1px solid rgba(255,255,255,.2)':'1px solid rgba(255,255,255,.06)', transition:'background .4s' }}>
+            <div style={{ display:'flex', alignItems:'center', gap:14 }}>
+              <div style={{ width:52, height:52, borderRadius:14, background:s.color, display:'flex', alignItems:'center', justifyContent:'center', fontSize:24, flexShrink:0 }}>{s.emoji}</div>
+              <div style={{ flex:1 }}>
+                <div style={{ fontSize:15, fontWeight:600, color:'white', marginBottom:3 }}>{s.title}</div>
+                <div style={{ fontSize:11, color:'rgba(255,255,255,.5)', lineHeight:1.5 }}>{s.desc}</div>
+                {activeId===s.id && isPlaying && <div style={{ fontSize:10, color:'rgba(255,255,255,.5)', marginTop:4 }}>Playing - tap to stop</div>}
+              </div>
+              <div style={{ width:36, height:36, borderRadius:'50%', background:activeId===s.id&&isPlaying?'rgba(255,255,255,.9)':'rgba(255,255,255,.1)', display:'flex', alignItems:'center', justifyContent:'center', fontSize:14, color:activeId===s.id&&isPlaying?'#0d1117':'white', flexShrink:0 }}>
+                {activeId===s.id&&isPlaying?'||':'>'}
+              </div>
+            </div>
+          </div>
+        ))}
+        <div style={{ textAlign:'center', padding:'20px 0', fontSize:11, color:'rgba(255,255,255,.2)' }}>Continuous ambient sound</div>
+      </div>
+      <Nav active="home" go={go} />
+    </div>
+  );
+}
