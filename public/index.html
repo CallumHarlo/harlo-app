@@ -1,16 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-  <meta name="theme-color" content="#2D5A4F" /><link rel="icon" type="image/png" href="/logo192.png" /><link rel="apple-touch-icon" href="/logo192.png" /><link rel="manifest" href="/manifest.json" />
-  <title>Harlo</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Nunito:wght@300;400;600&display=swap" rel="stylesheet" />
-  <meta name="vapid" content="BNNfCjH7rcER9gkobC-zbFzCi4HKS2v8iCNd-_O-x4FhaClAmB6_GpdxrMaAFwpJPrlsHsrle3AqWoZq8CigmUU">
-</head>
-<body>
-  <div id="root"></div>
-  <script>if("serviceWorker" in navigator){navigator.serviceWorker.register("/sw.js")}</script>
-</body>
-</html>
+# Paste the HTML from clipboard into the file
+pbpaste > public/index.html
+
+# Verify it worked
+head -3 public/index.html
+
+# Commit and push
+git add public/index.html
+git commit -m "Add Harlo landing page"
+git push origin main
