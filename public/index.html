@@ -19,19 +19,14 @@
       --rose-lt:   #FAF0F1;
       --amber:     #C49A4A;
     }
-
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
-
     body {
       font-family: 'Nunito', sans-serif;
       background: var(--cream);
       color: var(--ink);
       overflow-x: hidden;
     }
-
-    /* ── NAV ─────────────────────────────────────────────── */
     nav {
       position: fixed; top: 0; left: 0; right: 0;
       z-index: 100;
@@ -63,8 +58,6 @@
       transition: opacity 0.2s;
     }
     .nav-cta:hover { opacity: 0.85; }
-
-    /* ── HERO ─────────────────────────────────────────────── */
     .hero {
       min-height: 100vh;
       display: flex; flex-direction: column;
@@ -74,8 +67,6 @@
       position: relative;
       overflow: hidden;
     }
-
-    /* Soft background blobs */
     .hero::before {
       content: '';
       position: absolute; top: -100px; right: -100px;
@@ -90,7 +81,6 @@
       background: radial-gradient(circle, rgba(201,123,132,0.08) 0%, transparent 70%);
       pointer-events: none;
     }
-
     .hero-badge {
       display: inline-flex; align-items: center; gap: 6px;
       background: var(--green-lt); color: var(--green);
@@ -101,7 +91,6 @@
       animation: fadeUp 0.6s ease both;
     }
     .hero-badge span { width: 6px; height: 6px; border-radius: 50%; background: var(--green); display: inline-block; }
-
     .hero h1 {
       font-family: 'Playfair Display', serif;
       font-size: clamp(40px, 7vw, 76px);
@@ -114,7 +103,6 @@
     .hero h1 em {
       font-style: italic; color: var(--green);
     }
-
     .hero-sub {
       font-size: clamp(16px, 2vw, 20px);
       color: var(--mid); line-height: 1.7;
@@ -122,8 +110,6 @@
       font-weight: 400;
       animation: fadeUp 0.6s ease 0.2s both;
     }
-
-    /* Waitlist form */
     .waitlist-form {
       display: flex; gap: 10px;
       max-width: 440px; width: 100%;
@@ -148,13 +134,10 @@
       transition: all 0.2s;
     }
     .waitlist-form button:hover { background: var(--green-mid); transform: translateY(-1px); }
-
     .hero-note {
       margin-top: 14px; font-size: 12px; color: var(--mid);
       animation: fadeUp 0.6s ease 0.4s both;
     }
-
-    /* Floating phone mockup */
     .phone-wrap {
       margin-top: 72px; position: relative;
       animation: fadeUp 0.8s ease 0.3s both;
@@ -200,35 +183,24 @@
     .phone-card-label { font-size: 8px; color: var(--mid); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
     .phone-card-text { font-size: 9px; color: var(--ink); line-height: 1.4; margin-bottom: 4px; }
     .phone-card-sub { font-size: 8px; color: var(--green); font-weight: 600; }
-
-    /* Sections */
     section { padding: 100px 24px; }
     .section-label { font-size: 12px; font-weight: 700; color: var(--green); text-transform: uppercase; letter-spacing: 0.08em; text-align: center; margin-bottom: 14px; }
     .section-title { font-family: 'Playfair Display', serif; font-size: clamp(28px, 5vw, 48px); font-weight: 700; line-height: 1.2; text-align: center; max-width: 800px; margin: 0 auto 72px; }
     .section-title em { font-style: italic; color: var(--green); }
-
-    /* Features grid */
     .features { background: white; border-top: 1px solid #ede8e1; border-bottom: 1px solid #ede8e1; }
     .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; max-width: 1000px; margin: 0 auto; }
     .feature-card { text-align: center; }
     .feature-icon { width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; margin: 0 auto 20px; }
     .feature-title { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 600; margin-bottom: 12px; color: var(--ink); }
     .feature-text { font-size: 15px; color: var(--mid); line-height: 1.6; }
-
-    /* For You section */
     .for-you { text-align: center; }
     .pills-grid { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; max-width: 800px; margin: 0 auto; }
     .pill { background: white; border: 1px solid #ede8e1; border-radius: 50px; padding: 10px 18px; font-size: 13px; color: var(--mid); font-weight: 500; }
-
-    /* Waitlist section */
     .waitlist-section { background: var(--green); color: white; text-align: center; }
     .waitlist-section .section-label { color: rgba(255,255,255,0.7); }
     .waitlist-section h2 { font-family: 'Playfair Display', serif; font-size: clamp(32px, 5vw, 48px); font-weight: 700; line-height: 1.2; margin-bottom: 20px; color: white; }
     .waitlist-section p { font-size: 18px; line-height: 1.6; color: rgba(255,255,255,0.85); margin-bottom: 40px; }
     .waitlist-box { max-width: 600px; margin: 0 auto; padding: 60px 40px; }
-    .success-msg { display: none; background: rgba(255,255,255,0.1); color: white; padding: 16px 24px; border-radius: 12px; margin-top: 20px; font-weight: 600; }
-
-    /* Footer */
     footer { padding: 60px 24px; background: var(--cream); text-align: center; border-top: 1px solid #ede8e1; display: flex; flex-direction: column; align-items: center; gap: 16px; }
     .footer-logo { display: flex; align-items: center; gap: 8px; }
     .footer-logo-icon { width: 28px; height: 28px; border-radius: 7px; background: var(--green); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 700; color: white; }
@@ -237,14 +209,10 @@
     .footer-links { display: flex; gap: 20px; }
     .footer-links a { font-size: 12px; color: var(--mid); text-decoration: none; }
     .footer-links a:hover { color: var(--green); }
-
-    /* ── ANIMATIONS ──────────────────────────────────────── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-
-    /* ── RESPONSIVE ──────────────────────────────────────── */
     @media (max-width: 640px) {
       nav { padding: 14px 20px; }
       .waitlist-form { flex-direction: column; }
@@ -256,8 +224,6 @@
   </style>
 </head>
 <body>
-
-  <!-- NAV -->
   <nav>
     <div class="nav-logo">
       <div class="nav-logo-icon">H</div>
@@ -265,20 +231,15 @@
     </div>
     <a href="#waitlist" class="nav-cta">Join Waitlist</a>
   </nav>
-
-  <!-- HERO -->
   <section class="hero">
     <div class="hero-badge"><span></span> Coming soon to iOS</div>
     <h1>Your daily companion for<br><em>a healthier mind</em></h1>
     <p class="hero-sub">Harlo helps you check in with yourself every day — journal your thoughts, track your mood, reflect with AI, and connect with a supportive community.</p>
-
-    <form class="waitlist-form" id="heroForm" onsubmit="submitWaitlist(event, 'heroForm')">
-      <input type="email" placeholder="your@email.com" required />
+    <form class="waitlist-form" action="https://formspree.io/f/mjgpdwdp" method="POST">
+      <input type="email" name="email" placeholder="your@email.com" required />
       <button type="submit">Notify me</button>
     </form>
     <p class="hero-note">Free forever for core features &nbsp;·&nbsp; No spam, ever</p>
-
-    <!-- Phone mockup -->
     <div class="phone-wrap">
       <div class="phone">
         <div class="phone-notch"></div>
@@ -307,12 +268,9 @@
       </div>
     </div>
   </section>
-
-  <!-- FEATURES -->
   <section class="features">
     <div class="section-label">What Harlo does</div>
     <h2 class="section-title">Everything you need to <em>show up for yourself</em> every day</h2>
-
     <div class="features-grid">
       <div class="feature-card">
         <div class="feature-icon" style="background:#E8F5F2;">😌</div>
@@ -346,8 +304,6 @@
       </div>
     </div>
   </section>
-
-  <!-- FOR YOU -->
   <section class="for-you">
     <div class="section-label">Who Harlo is for</div>
     <h2 class="section-title">For anyone who wants to <em>feel better</em> — every day</h2>
@@ -364,25 +320,18 @@
       <div class="pill">Anyone wanting to feel more like themselves</div>
     </div>
   </section>
-
-  <!-- WAITLIST -->
   <section class="waitlist-section" id="waitlist">
     <div class="waitlist-box">
       <div class="section-label">Join the waitlist</div>
       <h2>Be first to know<br>when we launch</h2>
       <p>Harlo is launching on iOS very soon. Drop your email and we'll let you know the moment it's live — plus early access perks for our first members.</p>
-      <form class="waitlist-form" id="waitlistForm" onsubmit="submitWaitlist(event, 'waitlistForm')" style="max-width:100%">
-        <input type="email" placeholder="your@email.com" required />
+      <form class="waitlist-form" action="https://formspree.io/f/mjgpdwdp" method="POST" style="max-width:100%">
+        <input type="email" name="email" placeholder="your@email.com" required />
         <button type="submit">Join waitlist</button>
       </form>
-      <div class="success-msg" id="successMsg">
-        ✓ You're on the list! We'll be in touch when Harlo launches.
-      </div>
       <p style="margin-top:16px; font-size:12px; color:rgba(255,255,255,0.7)">No spam. Unsubscribe anytime.</p>
     </div>
   </section>
-
-  <!-- FOOTER -->
   <footer>
     <div class="footer-logo">
       <div class="footer-logo-icon">H</div>
@@ -395,29 +344,5 @@
     </div>
     <p>© 2026 Harlo. Made with care for people who need it.</p>
   </footer>
-
-  <script>
-    function submitWaitlist(e, formId) {
-      e.preventDefault();
-      const form = document.getElementById(formId);
-      const email = form.querySelector('input[type="email"]').value;
-
-      // Store email in localStorage as a simple collect (replace with Mailchimp/Formspree in prod)
-      const emails = JSON.parse(localStorage.getItem('harlo_waitlist') || '[]');
-      if (!emails.includes(email)) emails.push(email);
-      localStorage.setItem('harlo_waitlist', JSON.stringify(emails));
-
-      // Show success
-      form.style.display = 'none';
-      const success = document.getElementById('successMsg') || form.nextElementSibling;
-      if (success) success.style.display = 'block';
-
-      // For hero form, show inline success
-      if (formId === 'heroForm') {
-        form.insertAdjacentHTML('afterend', '<div style="background:rgba(45,90,79,0.1);color:var(--green);padding:12px 20px;border-radius:12px;margin-top:16px;font-size:14px;font-weight:600;">✓ You\'re on the list! We\'ll be in touch when Harlo launches.</div>');
-      }
-    }
-  </script>
-
 </body>
 </html>
